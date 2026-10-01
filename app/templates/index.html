@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Demo Application</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Crypto Demo Application</h1>
+      <p class="subtitle">A realistic cryptographic workload for PQC scanner testing</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ─────────────────── RSA ─────────────────── -->
+    <section class="card" id="section-rsa">
+      <h2>RSA Operations</h2>
+      <p class="card-note">RSA-2048 · OAEP/SHA-256 encryption · PSS/SHA-256 signatures</p>
+
+      <div class="btn-row">
+        <button onclick="rsaGenerate()">Generate RSA Key</button>
+      </div>
+
+      <label>Plaintext
+        <input type="text" id="rsa-plaintext" value="Hello, quantum world!" />
+      </label>
+      <div class="btn-row">
+        <button onclick="rsaEncrypt()">Encrypt</button>
+        <button onclick="rsaDecrypt()">Decrypt</button>
+      </div>
+
+      <label>Message to sign / verify
+        <input type="text" id="rsa-message" value="Sign this message." />
+      </label>
+      <div class="btn-row">
+        <button onclick="rsaSign()">Sign</button>
+        <button onclick="rsaVerify()">Verify</button>
+      </div>
+
+      <div class="result" id="rsa-result"></div>
+    </section>
+
+    <!-- ─────────────────── ECDSA ─────────────────── -->
+    <section class="card" id="section-ecdsa">
+      <h2>ECDSA</h2>
+      <p class="card-note">P-256 (secp256r1) · ECDSA/SHA-256</p>
+
+      <div class="btn-row">
+        <button onclick="ecdsaGenerate()">Generate Key</button>
+      </div>
+
+      <label>Message
+        <input type="text" id="ecdsa-message" value="ECDSA test message" />
+      </label>
+      <div class="btn-row">
+        <button onclick="ecdsaSign()">Sign</button>
+        <button onclick="ecdsaVerify()">Verify</button>
+      </div>
+
+      <div class="result" id="ecdsa-result"></div>
+    </section>
+
+    <!-- ─────────────────── ECDH ─────────────────── -->
+    <section class="card" id="section-ecdh">
+      <h2>ECDH</h2>
+      <p class="card-note">P-256 · Elliptic-curve Diffie–Hellman key agreement</p>
+
+      <div class="btn-row">
+        <button onclick="ecdhExchange()">Perform Key Exchange</button>
+      </div>
+
+      <div class="result" id="ecdh-result"></div>
+    </section>
+
+    <!-- ─────────────────── DH ─────────────────── -->
+    <section class="card" id="section-dh">
+      <h2>Diffie–Hellman</h2>
+      <p class="card-note">RFC 3526 MODP-2048 finite-field key exchange</p>
+
+      <div class="btn-row">
+        <button onclick="dhExchange()">Perform DH Key Exchange</button>
+      </div>
+
+      <div class="result" id="dh-result"></div>
+    </section>
+
+    <!-- ─────────────────── AES ─────────────────── -->
+    <section class="card" id="section-aes">
+      <h2>AES</h2>
+      <p class="card-note">AES-256-GCM authenticated encryption</p>
+
+      <label>Plaintext
+        <input type="text" id="aes-plaintext" value="Secret message for AES" />
+      </label>
+      <label>Associated Data (optional)
+        <input type="text" id="aes-aad" value="demo-context" />
+      </label>
+      <div class="btn-row">
+        <button onclick="aesEncrypt()">AES Encrypt</button>
+        <button onclick="aesDecrypt()">AES Decrypt</button>
+      </div>
+
+      <div class="result" id="aes-result"></div>
+    </section>
+
+    <!-- ─────────────────── Hashing ─────────────────── -->
+    <section class="card" id="section-hash">
+      <h2>Hashing</h2>
+      <p class="card-note">SHA-256 and SHA-512 digests</p>
+
+      <label>Input text
+        <input type="text" id="hash-text" value="Hash this string" />
+      </label>
+      <div class="btn-row">
+        <button onclick="hashSHA256()">SHA-256</button>
+        <button onclick="hashSHA512()">SHA-512</button>
+      </div>
+
+      <div class="result" id="hash-result"></div>
+    </section>
+
+    <!-- ─────────────────── TLS ─────────────────── -->
+    <section class="card" id="section-tls">
+      <h2>TLS / HTTPS Client</h2>
+      <p class="card-note">
+        Scenario C — Runtime Through Dependency: TLS cryptography is performed by the
+        Python ssl/OpenSSL layer. Minimal explicit crypto in source; rich runtime activity.
+      </p>
+
+      <label>URL <small>(leave blank for built-in local endpoint)</small>
+        <input type="text" id="tls-url" placeholder="https://localhost:8443/" />
+      </label>
+      <div class="btn-row">
+        <button onclick="tlsRequest()">Make HTTPS Request</button>
+      </div>
+
+      <div class="result" id="tls-result"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Crypto Demo Application — target workload for PQC scanner testing</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
